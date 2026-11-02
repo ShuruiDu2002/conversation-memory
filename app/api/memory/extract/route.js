@@ -83,7 +83,20 @@ export async function POST(request) {
     }
     const extracted = normalizeExtraction(parsed, nodes, userText);
     debugLog("[extract] normalized result:\n", JSON.stringify(extracted, null, 2));
-    return Response.json({ mode: "live", ...extracted });
+    const payload = {
+      mode: "live",
+      decision: extracted.decision,
+      reason: extracted.reason,
+      operations: extracted.operations
+    };
+    if (body.debug === true) {
+      payload.raw = {
+        decision: parsed && typeof parsed === "object" && "decision" in parsed ? parsed.decision : null,
+        operations: parsed && typeof parsed === "object" && "operations" in parsed ? parsed.operations : null
+      };
+      payload.dropped = extracted.dropped;
+    }
+    return Response.json(payload);
   } catch {
     console.error("[extract] OpenAI request failed");
     return Response.json(fallbackExtraction(userText, nodes, "Memory extraction failed; using the keyword fallback."));
@@ -110,7 +123,7 @@ Eligibility, not importance:
 - If it qualifies and is new, use suggest_memory so the user can accept or reject it.
 
 Do not remember:
-- temporary states ("I am hungry right now.", "I'm tired today.")
+- temporary states ("I have a headache this afternoon.", "I'm tired today.")
 - one-off questions ("What fish is this?")
 - general-knowledge questions ("Is chocolate healthy?")
 - greetings, thanks, and task instructions
@@ -126,21 +139,34 @@ After a statement qualifies, compare it with the closest existing memory before 
 5. Same topic, but a different fact that can be true at the same time → decision "related" and suggest_memory under the existing parent. Do not overwrite the earlier memory.
 6. Otherwise → decision "suggested" and suggest_memory.
 
+Use update only when the user states a change over time (now, anymore, no longer, used to, previously, moved, switched). A correction or denial with no time marker that contradicts an existing memory is conflict, not update. Existing "User lives in Chicago." plus "I live in Boston." is conflict. Existing "User is vegetarian." plus "I eat steak every week." is conflict.
+
+update, refinement, conflict and duplicate require an existing memory that is clearly about the same fact. If no such memory exists, use suggested or not_remembered. A retraction about something that is not in the model is not_remembered. "I was wrong, I don't play chess." when there is no chess memory is not_remembered.
+
+For conflict, update and refinement you must fill targetId and statement.
+
 Examples:
 - Existing "User likes chocolate." plus "I like dark chocolate." is refinement, not related. Update that memory to "User likes chocolate, especially dark chocolate."
 - Then "I prefer chocolate cake over cheesecake." is related. Add a separate memory. Do not change the chocolate memory.
 - "I don't like chocolate anymore." or "I used to like chocolate, but now I hate it." is update, not conflict.
 - "I hate chocolate." with no temporal change is conflict.
+- Existing "User lives in Chicago." plus "I live in Boston." is conflict, not update.
+- Existing "User is vegetarian." plus "I eat steak every week." is conflict, not update.
+- "I was wrong, I don't play chess." when chess is not in the model is not_remembered.
 - "I also like classical music." beside jazz is related.
 - "For this question, give me a very detailed explanation." does not qualify and must not update a stable preference.
 
-Put the memory under the most semantically fitting existing category from the outline. If none fits, use a new top-level category with a short, general name (at most one new category per turn). Lasting constraints and health facts (allergies, dietary restrictions, medical conditions, accessibility needs) belong under "Health & Diet" or a similar category, never under "Interests". Interests are things the user enjoys. Education, Career, Projects, and Living keep their usual meaning. Keep max depth 2. Never use move or merge. Refinement and update must include the existing memory id from the outline. Never put those on a new suggest_memory.
+Put the memory under the most semantically fitting existing category from the outline. If none fits, use a new top-level category with a short, general name (at most one new category per turn). Lasting constraints and health facts (allergies, dietary restrictions, medical conditions, accessibility needs) belong under "Health & Diet" or a similar category, never under "Interests". Interests are things the user enjoys. Education, Career, Projects, and Living keep their usual meaning. Keep max depth 2. Never use move or merge. Refinement, update, and conflict must name the existing memory. Never put those on a new suggest_memory.
 
-If the existing title no longer describes the updated content, give a short new title (2-4 words). Otherwise omit newTitle. Do not copy a placeholder. The title names the fact, not the change. Never use words like Update, Change, New or Correction. For "allergic to crab but not to shrimp" the title is "Crab Allergy". A broader title does not still fit. "Shrimp and Crab Allergy" with new content "User is allergic to crab but not to shrimp." needs newTitle "Crab Allergy". "Nut Allergy" with new content about one kind of walnut needs a new title such as "Specific Walnut Allergy". A conflict may include newTitle the same way, for when the newer statement replaces the fact.
+If the existing title no longer describes the updated content, give a short new title (2-4 words). Otherwise omit newTitle. Do not copy a placeholder. The title names the fact, not the change. Never use words like Update, Change, New or Correction. For "lives in Boston, not Chicago" the title is "Boston Home". A broader title does not still fit. "Chicago Resident" with new content "User lives in Boston." needs newTitle "Boston Home". "Vegetarian" with new content about eating steak every week needs a new title such as "Weekly Steak". A conflict may include newTitle the same way, for when the newer statement replaces the fact.
+
+For conflict, update and refinement you must fill targetId and statement. targetId is the id of the existing memory the message is about. statement is one sentence, third person: "User ...".
 
 Always return JSON:
 {
   "decision": "suggested" | "related" | "refinement" | "update" | "conflict" | "duplicate" | "not_remembered",
+  "targetId": "existing memory id, required for conflict, update, and refinement",
+  "statement": "one sentence, third person: User ...",
   "reason": "One short sentence to the user. Do not mention models, prompts, JSON, or decision names. Write the reason in second person ('You ...', 'This ...'), never 'The user'.",
   "operations": [
     {
@@ -175,6 +201,7 @@ const DEFAULT_REASONS = {
 };
 
 function normalizeExtraction(parsed, nodes = [], userText = "") {
+  const dropped = [];
   let operations = normalizeOperations(parsed);
   const stated = typeof parsed?.decision === "string" ? parsed.decision : "";
   let decision = DECISIONS.includes(stated) ? stated : decisionFromOperations(operations);
@@ -182,37 +209,120 @@ function normalizeExtraction(parsed, nodes = [], userText = "") {
 
   const rehome = operations.find((op) => op.type === "suggest_rehome" && (op.id || op.existingMemoryId));
   if ((decision === "duplicate" || decision === "not_remembered") && rehome) {
+    for (const op of operations) {
+      if (op !== rehome) dropped.push(dropRecord(op, "not the selected rehome"));
+    }
     decision = "suggested";
     operations = [rehome];
   } else if (decision === "duplicate") {
     const synthesized = misfiledHealthMemory(userText, parsed?.reason, nodes);
     if (synthesized) {
+      for (const op of operations) dropped.push(dropRecord(op, "duplicate replaced by rehome"));
       decision = "suggested";
       operations = [synthesized];
     } else {
+      for (const op of operations) dropped.push(dropRecord(op, "duplicate clears operations"));
       operations = [];
     }
   } else if (decision === "not_remembered") {
+    for (const op of operations) dropped.push(dropRecord(op, "not_remembered clears operations"));
     operations = [];
   } else if (decision === "refinement" || decision === "update") {
-    operations = operations
-      .map((op) => toUpdate(op, nodes))
-      .filter((op) => op.type === "suggest_update" && op.id);
+    const kept = [];
+    for (const op of operations) {
+      const updated = toUpdate(op, nodes, userText);
+      if (updated && updated.type === "suggest_update" && updated.id) kept.push(updated);
+      else dropped.push(dropRecord(op, updateDropReason(op, nodes)));
+    }
+    operations = kept;
   } else if (decision === "conflict") {
-    operations = operations.filter((op) => op.type === "conflict");
+    const kept = [];
+    for (const op of operations) {
+      if (op.type !== "conflict") {
+        dropped.push(dropRecord(op, "wrong type"));
+        continue;
+      }
+      const id = op.existingMemoryId || op.id || "";
+      const node = nodes.find((item) => item.id === id && item.type === "memory");
+      if (!node) {
+        dropped.push(dropRecord(op, id ? "invalid id" : "missing id"));
+        continue;
+      }
+      kept.push({
+        ...op,
+        existingMemoryId: node.id,
+        existingContent: op.existingContent || node.content || ""
+      });
+    }
+    operations = kept;
   } else if (decision === "related" || decision === "suggested") {
-    operations = operations.filter(
-      (op) => op.type === "suggest_memory" || op.type === "add_memory" || op.type === "suggest_rehome"
-    );
+    operations = operations.filter((op) => {
+      if (op.type === "suggest_memory" || op.type === "add_memory" || op.type === "suggest_rehome") return true;
+      dropped.push(dropRecord(op, "wrong type"));
+      return false;
+    });
+  }
+
+  if (
+    (decision === "conflict" || decision === "update" || decision === "refinement") &&
+    operations.length === 0
+  ) {
+    const synthesized = synthesizeTargetOperation(parsed, nodes, decision);
+    if (synthesized) operations = [synthesized];
+    else dropped.push({ type: "", id: "", title: "", reason: "no valid targetId" });
   }
 
   if (decision !== "not_remembered" && decision !== "duplicate" && operations.length === 0) {
     decision = "not_remembered";
+    if (!dropped.some((item) => item.reason === "no valid targetId")) {
+      dropped.push({ type: "", id: "", title: "", reason: "no operations left, so the decision became not_remembered" });
+    }
   }
   const modelReason = decision === stated ? cleanReason(parsed?.reason) : "";
   const reason = modelReason || DEFAULT_REASONS[decision];
   operations = operations.map((op) => ({ ...op, reason: userFacingReason(op.reason, reason) }));
-  return { decision, reason, operations };
+  return { decision, reason, operations, dropped };
+}
+
+function dropRecord(op, reason) {
+  const content = op?.newContent || op?.content || op?.existingContent || "";
+  return {
+    type: typeof op?.type === "string" ? op.type : "",
+    id: op?.id || op?.existingMemoryId || "",
+    title: typeof op?.title === "string" ? op.title : "",
+    content: typeof content === "string" ? content.slice(0, 240) : "",
+    reason
+  };
+}
+
+function synthesizeTargetOperation(parsed, nodes, decision) {
+  const targetId = typeof parsed?.targetId === "string" ? parsed.targetId.trim() : "";
+  const node = nodes.find((item) => item.id === targetId && item.type === "memory");
+  if (!node) return null;
+  const statement = typeof parsed?.statement === "string" ? parsed.statement.trim() : "";
+  const reason = cleanReason(parsed?.reason) || DEFAULT_REASONS[decision];
+  if (decision === "conflict") {
+    return {
+      type: "conflict",
+      existingMemoryId: node.id,
+      existingContent: node.content || "",
+      newContent: statement,
+      reason
+    };
+  }
+  return {
+    type: "suggest_update",
+    id: node.id,
+    newContent: statement,
+    reason
+  };
+}
+
+function updateDropReason(op, nodes) {
+  const id = op?.id || op?.existingMemoryId || "";
+  if (!id) return "missing id";
+  if (!nodes.some((node) => node.id === id)) return "invalid id";
+  return "missing id";
 }
 
 const HEALTH_ALIASES = {
@@ -294,7 +404,7 @@ function cleanTitle(value) {
   return title;
 }
 
-function toUpdate(op, nodes) {
+function toUpdate(op, nodes, userText = "") {
   const id = op.id || op.existingMemoryId || "";
   const existing = nodes.find((node) => node.id === id);
   const proposed = cleanTitle(op.newTitle) || (existing ? cleanTitle(op.title) : "");
@@ -308,8 +418,9 @@ function toUpdate(op, nodes) {
     newTitle: sameTitle ? "" : proposed
   };
   if (next.id && nodes.some((node) => node.id === next.id)) return next;
+  if (hasNonAscii(userText)) return null;
   const target = closestMemory(next, nodes);
-  if (!target) return next;
+  if (!target) return null;
   return {
     ...next,
     id: target.id,
@@ -330,7 +441,11 @@ function closestMemory(op, nodes) {
       best = node;
     }
   }
-  return bestScore > 0 ? best : null;
+  return bestScore >= 2 ? best : null;
+}
+
+function hasNonAscii(value) {
+  return /[^\u0000-\u007f]/.test(String(value || ""));
 }
 
 function wordsOf(value) {

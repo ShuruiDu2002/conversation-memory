@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "probe": "node --env-file=.env.local scripts/probe-retrieval.mjs",
+    "eval": "node scripts/eval.mjs",
+    "eval:heldout": "node scripts/eval.mjs --heldout"
   },
   "dependencies": {
     "@xyflow/react": "^12.11.6",

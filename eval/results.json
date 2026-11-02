@@ -1,0 +1,2729 @@
+{
+  "date": "2026-11-02",
+  "base": "http://localhost:3000",
+  "models": {
+    "extract": "gpt-4o-mini (temperature 0.2)",
+    "chatInject": "gpt-4o-mini (temperature 0.6)",
+    "chatAgent": "gpt-4o-mini (temperature 0.2 with tools)",
+    "embeddings": "text-embedding-3-small",
+    "heuristic": "lib/heuristicExtract.js keyword baseline"
+  },
+  "counts": {
+    "nodes": 22,
+    "memories": 14,
+    "extractionTurns": 31,
+    "questions": 25,
+    "needsMemory": 20,
+    "noMemory": 5
+  },
+  "note": "Each question was sent once at the server's normal temperature. Results vary run to run.",
+  "extraction": {
+    "heuristic": {
+      "correct": 11,
+      "total": 31,
+      "errors": 0,
+      "rate": 0.3548387096774194,
+      "lenient": {
+        "correct": 11,
+        "total": 31,
+        "rate": 0.3548387096774194
+      },
+      "outcome": {
+        "correct": 15,
+        "total": 31,
+        "rate": 0.4838709677419355
+      },
+      "categoryPlacement": {
+        "correct": 0,
+        "total": 1,
+        "rate": 0
+      },
+      "perDecision": {
+        "suggested": {
+          "correct": 1,
+          "total": 3,
+          "rate": 0.3333333333333333
+        },
+        "related": {
+          "correct": 0,
+          "total": 5,
+          "rate": 0
+        },
+        "refinement": {
+          "correct": 1,
+          "total": 4,
+          "rate": 0.25
+        },
+        "update": {
+          "correct": 0,
+          "total": 3,
+          "rate": 0
+        },
+        "conflict": {
+          "correct": 1,
+          "total": 4,
+          "rate": 0.25
+        },
+        "duplicate": {
+          "correct": 0,
+          "total": 4,
+          "rate": 0
+        },
+        "not_remembered": {
+          "correct": 8,
+          "total": 8,
+          "rate": 1
+        }
+      },
+      "matrix": {
+        "suggested": {
+          "suggested": 1,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 2,
+          "other": 0
+        },
+        "related": {
+          "suggested": 1,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 4,
+          "other": 0
+        },
+        "refinement": {
+          "suggested": 1,
+          "related": 0,
+          "refinement": 1,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 2,
+          "other": 0
+        },
+        "update": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 3,
+          "other": 0
+        },
+        "conflict": {
+          "suggested": 1,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 1,
+          "duplicate": 0,
+          "not_remembered": 2,
+          "other": 0
+        },
+        "duplicate": {
+          "suggested": 1,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 3,
+          "other": 0
+        },
+        "not_remembered": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 8,
+          "other": 0
+        }
+      },
+      "rows": [
+        {
+          "id": "e01",
+          "text": "I prefer to write notes by hand.",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e02",
+          "text": "I'm learning to play the piano.",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e03",
+          "text": "我每周日会去游泳。",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e04",
+          "text": "I'm allergic to peanuts.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": false,
+          "error": null
+        },
+        {
+          "id": "e05",
+          "text": "Besides narrative games, I also like board games.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e06",
+          "text": "I also tinker with a pixel-art tool on weekends.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e07",
+          "text": "除了叙事游戏，我也喜欢桌游。",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e08",
+          "text": "I want to keep a separate notes app alongside the conversation-memory prototype.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e09",
+          "text": "I am interested in HCI, especially human-AI interaction.",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "refinement",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e10",
+          "text": "My MSCS at Northwestern starts in fall 2026, and I hope to finish in two years.",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e11",
+          "text": "我想上的人机交互课特别关注人和 AI 怎么协作。",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e12",
+          "text": "I play narrative video games, mostly story-heavy ones, to unwind.",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e13",
+          "text": "I don't want applied AI coursework anymore; I only want HCI courses.",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e14",
+          "text": "I used to want to study how people manage AI memory, but now I want to study developer tools.",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e15",
+          "text": "我不再考虑软件工程的工作了。",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e16",
+          "text": "Actually, my major is Journalism.",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "conflict",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e17",
+          "text": "I am not allergic to crab.",
+          "gold": "conflict",
+          "alternatives": [
+            "update"
+          ],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e18",
+          "text": "我的专业是新闻学，不是计算机。",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e19",
+          "text": "I completed my undergraduate degree in Economics, not Computer Science.",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e20",
+          "text": "I'm doing the MSCS at Northwestern, starting this fall.",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e21",
+          "text": "Narrative games are how I relax.",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e22",
+          "text": "我对核桃过敏。",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e23",
+          "text": "I can't have dairy, I'm lactose intolerant.",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e24",
+          "text": "What is 12*8?",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e25",
+          "text": "I'm hungry right now.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e26",
+          "text": "My friend Alex is moving to Seattle.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e27",
+          "text": "Translate 'good morning' to French.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e28",
+          "text": "Rewrite this paragraph so it is shorter.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e29",
+          "text": "I was wrong, I'm not allergic to shrimp.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e30",
+          "text": "今天天气怎么样？",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "e31",
+          "text": "我朋友喜欢爵士。",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        }
+      ]
+    },
+    "live": {
+      "correct": 23,
+      "total": 31,
+      "errors": 0,
+      "rate": 0.7419354838709677,
+      "lenient": {
+        "correct": 23,
+        "total": 31,
+        "rate": 0.7419354838709677
+      },
+      "outcome": {
+        "correct": 26,
+        "total": 31,
+        "rate": 0.8387096774193549
+      },
+      "categoryPlacement": {
+        "correct": 1,
+        "total": 1,
+        "rate": 1
+      },
+      "perDecision": {
+        "suggested": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1
+        },
+        "related": {
+          "correct": 3,
+          "total": 5,
+          "rate": 0.6
+        },
+        "refinement": {
+          "correct": 1,
+          "total": 4,
+          "rate": 0.25
+        },
+        "update": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1
+        },
+        "conflict": {
+          "correct": 2,
+          "total": 4,
+          "rate": 0.5
+        },
+        "duplicate": {
+          "correct": 3,
+          "total": 4,
+          "rate": 0.75
+        },
+        "not_remembered": {
+          "correct": 8,
+          "total": 8,
+          "rate": 1
+        }
+      },
+      "matrix": {
+        "suggested": {
+          "suggested": 3,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 0,
+          "other": 0
+        },
+        "related": {
+          "suggested": 2,
+          "related": 3,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 0,
+          "other": 0
+        },
+        "refinement": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 1,
+          "update": 1,
+          "conflict": 0,
+          "duplicate": 2,
+          "not_remembered": 0,
+          "other": 0
+        },
+        "update": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 3,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 0,
+          "other": 0
+        },
+        "conflict": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 2,
+          "conflict": 2,
+          "duplicate": 0,
+          "not_remembered": 0,
+          "other": 0
+        },
+        "duplicate": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 1,
+          "duplicate": 3,
+          "not_remembered": 0,
+          "other": 0
+        },
+        "not_remembered": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 8,
+          "other": 0
+        }
+      },
+      "rows": [
+        {
+          "id": "e01",
+          "text": "I prefer to write notes by hand.",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2620,
+          "mode": "live",
+          "rawDecision": "suggested",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Note-Taking Preference",
+              "content": "User prefers to write notes by hand."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e02",
+          "text": "I'm learning to play the piano.",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 4141,
+          "mode": "live",
+          "rawDecision": "suggested",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Learning Piano",
+              "content": "User is learning to play the piano."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e03",
+          "text": "我每周日会去游泳。",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2393,
+          "mode": "live",
+          "rawDecision": "suggested",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Weekly Swimming",
+              "content": "User goes swimming every Sunday."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e04",
+          "text": "I'm allergic to peanuts.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": false,
+          "lenient": false,
+          "category": true,
+          "error": null,
+          "ms": 2278,
+          "mode": "live",
+          "rawDecision": "suggested",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Peanut Allergy",
+              "content": "User is allergic to peanuts."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e05",
+          "text": "Besides narrative games, I also like board games.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "related",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2527,
+          "mode": "live",
+          "rawDecision": "related",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Board Games",
+              "content": "User also likes board games."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e06",
+          "text": "I also tinker with a pixel-art tool on weekends.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "related",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2564,
+          "mode": "live",
+          "rawDecision": "related",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Pixel-Art Tool",
+              "content": "User tinkers with a pixel-art tool on weekends."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e07",
+          "text": "除了叙事游戏，我也喜欢桌游。",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "related",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2486,
+          "mode": "live",
+          "rawDecision": "related",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Tabletop Games",
+              "content": "User also enjoys tabletop games in addition to narrative video games."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e08",
+          "text": "I want to keep a separate notes app alongside the conversation-memory prototype.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 2802,
+          "mode": "live",
+          "rawDecision": "suggested",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Notes App",
+              "content": "User wants to keep a separate notes app alongside the conversation-memory prototype."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e09",
+          "text": "I am interested in HCI, especially human-AI interaction.",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "duplicate",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 1900,
+          "mode": "live",
+          "rawDecision": "duplicate",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e10",
+          "text": "My MSCS at Northwestern starts in fall 2026, and I hope to finish in two years.",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "update",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 3139,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-mscs",
+              "title": "MSCS Duration",
+              "content": "User is pursuing an MSCS at Northwestern starting fall 2026 and hopes to finish in two years."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e11",
+          "text": "我想上的人机交互课特别关注人和 AI 怎么协作。",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "refinement",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2826,
+          "mode": "live",
+          "rawDecision": "refinement",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-hci",
+              "title": "HCI Focus",
+              "content": "User is interested in HCI, especially how people collaborate with AI."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e12",
+          "text": "I play narrative video games, mostly story-heavy ones, to unwind.",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "duplicate",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 1209,
+          "mode": "live",
+          "rawDecision": "duplicate",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e13",
+          "text": "I don't want applied AI coursework anymore; I only want HCI courses.",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "update",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2376,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-applied-ai",
+              "title": "Applied AI Coursework",
+              "content": "User only wants HCI courses."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e14",
+          "text": "I used to want to study how people manage AI memory, but now I want to study developer tools.",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "update",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2776,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-research",
+              "title": "Research Focus",
+              "content": "User wants to study developer tools."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e15",
+          "text": "我不再考虑软件工程的工作了。",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "update",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2785,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-swe",
+              "title": "No Software Engineering Roles",
+              "content": "User is not considering software engineering roles alongside research."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e16",
+          "text": "Actually, my major is Journalism.",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "update",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 2724,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-major",
+              "title": "Journalism Major",
+              "content": "User's academic field is Journalism."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e17",
+          "text": "I am not allergic to crab.",
+          "gold": "conflict",
+          "alternatives": [
+            "update"
+          ],
+          "predicted": "conflict",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1592,
+          "mode": "live",
+          "rawDecision": "conflict",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e18",
+          "text": "我的专业是新闻学，不是计算机。",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "conflict",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1504,
+          "mode": "live",
+          "rawDecision": "conflict",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e19",
+          "text": "I completed my undergraduate degree in Economics, not Computer Science.",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "update",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 3180,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-cs-undergrad",
+              "title": "Undergraduate Degree",
+              "content": "User completed an undergraduate degree in Economics at the University of Minnesota."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "e20",
+          "text": "I'm doing the MSCS at Northwestern, starting this fall.",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "conflict",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 2256,
+          "mode": "live",
+          "rawDecision": "conflict",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e21",
+          "text": "Narrative games are how I relax.",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "duplicate",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1127,
+          "mode": "live",
+          "rawDecision": "duplicate",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e22",
+          "text": "我对核桃过敏。",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "duplicate",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1309,
+          "mode": "live",
+          "rawDecision": "duplicate",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e23",
+          "text": "I can't have dairy, I'm lactose intolerant.",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "duplicate",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1339,
+          "mode": "live",
+          "rawDecision": "duplicate",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e24",
+          "text": "What is 12*8?",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1170,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e25",
+          "text": "I'm hungry right now.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1060,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e26",
+          "text": "My friend Alex is moving to Seattle.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 963,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e27",
+          "text": "Translate 'good morning' to French.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 986,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e28",
+          "text": "Rewrite this paragraph so it is shorter.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1191,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e29",
+          "text": "I was wrong, I'm not allergic to shrimp.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1475,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e30",
+          "text": "今天天气怎么样？",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1363,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "e31",
+          "text": "我朋友喜欢爵士。",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1249,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        }
+      ]
+    }
+  },
+  "qa": {
+    "off": {
+      "errors": 0,
+      "answerCorrectness": {
+        "correct": 3,
+        "total": 20,
+        "rate": 0.15
+      },
+      "irrelevantMemories": {
+        "average": 0,
+        "questions": 25
+      },
+      "noMemoryEmpty": {
+        "correct": 5,
+        "total": 5,
+        "rate": 1
+      },
+      "latencyMs": 1247.88,
+      "rows": [
+        {
+          "id": "q01",
+          "question": "What ingredients should I avoid cooking with?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 3611,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "When cooking, you might want to avoid certain ingredients based on dietary restrictions, allergies, or health concerns. Here are some common ones: 1. **Allergens**: If you or anyone you're cooking for has allergies, avoid common allergens like nuts, dairy, eggs, soy, wheat (gluten), and shellfish. 2. **Processed Sugars**: Excessive sugar can lead to health issues, so consider limiting refined sugars and opting for natural sweeteners. 3. **Trans Fats**: Found in some margarine and processed food…"
+        },
+        {
+          "id": "q02",
+          "question": "我该避开什么食材",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2999,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "您应该避开的食材主要取决于个人的健康状况、过敏反应或饮食偏好。以下是一些常见的建议： 1. **过敏食材**：如坚果、海鲜、乳制品等，如果您对某些食材过敏，应避免食用。 2. **高糖食材**：如糖果、甜饮料等，过量摄入糖分可能导致健康问题。 3. **高盐食材**：如腌制食品和快餐，过量摄入盐分可能影响心血管健康。 4. **加工食品**：如香肠、罐头食品等，通常含有添加剂和防腐剂。 5. **高脂肪食材**：如油炸食品和某些红肉，过量摄入可能影响体重和心脏健康。 如果您有特定的健康需求或目标，建议咨询营养师或医生以获取专业建议。"
+        },
+        {
+          "id": "q03",
+          "question": "Am I allergic to crab?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1249,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": true,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "I can't diagnose allergies, but if you suspect you might be allergic to crab, it's important to consult a healthcare professional. They can perform tests to determine if you have an allergy and provide guidance on how to manage it. Have you experienced any symptoms after eating crab?"
+        },
+        {
+          "id": "q04",
+          "question": "我对核桃过敏吗",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1318,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": true,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "如果你对核桃过敏，可能会出现一些过敏反应，如皮肤瘙痒、肿胀、呼吸困难或消化不适等。确定是否过敏的最好方法是咨询医生或进行过敏测试。如果你怀疑自己对核桃过敏，建议避免食用并寻求专业建议。"
+        },
+        {
+          "id": "q05",
+          "question": "What dietary restriction do I have?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 947,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "I don’t have access to personal information, so I can’t determine your dietary restrictions. If you share what you can about your dietary needs or preferences, I’d be happy to help with relevant information or suggestions!"
+        },
+        {
+          "id": "q06",
+          "question": "Where am I starting graduate school?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 936,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "I'm not able to access personal information, so I can't tell you where you're starting graduate school. However, I can help answer questions about graduate school or provide tips for starting your program if you'd like!"
+        },
+        {
+          "id": "q07",
+          "question": "我研究生要去哪所学校",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1723,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "选择研究生学校时，可以考虑以下几个因素： 1. **专业方向**：确定自己的研究兴趣和专业方向，寻找在该领域有强大师资和研究资源的学校。 2. **地理位置**：考虑学校的位置是否方便，是否符合你的生活方式和职业规划。 3. **学校声誉**：查看学校的排名和声誉，尤其是你所选择的专业领域。 4. **课程设置**：了解课程内容、研究机会和实习项目，确保符合你的职业目标。 5. **学费和奖学金**：评估学费和生活成本，并寻找可能的奖学金或资助机会。 如果你有具体的专业或地区偏好，我可以提供更具体的建议。"
+        },
+        {
+          "id": "q08",
+          "question": "What was my undergraduate degree?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1091,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "I'm sorry, but I don't have access to your personal information or background. If you'd like to share your degree or talk about it, I'm here to listen!"
+        },
+        {
+          "id": "q09",
+          "question": "What is my major?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 982,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "I don't have access to personal information about you, including your major. If you'd like, you can share it, and we can discuss it further!"
+        },
+        {
+          "id": "q10",
+          "question": "我本科读的是什么",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 678,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "请问您本科读的是什么专业？我可以帮助您讨论相关的主题或问题。"
+        },
+        {
+          "id": "q11",
+          "question": "Which courses do I want in the first quarter?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1602,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "To help you choose courses for your first quarter, consider the following factors: 1. **Major Requirements**: What are the core courses required for your major? 2. **Interests**: Which subjects are you passionate about or curious to explore? 3. **Workload**: How many courses can you realistically handle while maintaining a balance with other commitments? 4. **Prerequisites**: Are there any prerequisites for advanced courses you might want to take in later quarters? 5. **Electives**: Are there a…"
+        },
+        {
+          "id": "q12",
+          "question": "What do I want to research?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1619,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "To help you determine what you want to research, consider the following questions: 1. **Interests**: What topics or fields are you passionate about? 2. **Skills**: What skills do you have, and how can they be applied to your research? 3. **Impact**: What issues or problems do you want to address? 4. **Resources**: What resources (time, funding, access to data) do you have available? 5. **Audience**: Who do you want to reach or benefit from your research? Reflecting on these questions can help c…"
+        },
+        {
+          "id": "q13",
+          "question": "我想研究什么",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2058,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "你可以考虑几个方向来进行研究： 1. **人机交互**：研究用户如何与技术互动，关注用户体验和界面设计。 2. **可穿戴技术**：探索智能手表、健康监测设备等对日常生活的影响。 3. **虚拟现实与增强现实**：研究这些技术在教育、培训或娱乐中的应用。 4. **人工智能**：研究AI在各个领域的应用，包括自然语言处理和机器学习。 5. **社会媒体的影响**：分析社交媒体对人际关系和心理健康的影响。 你对哪个方向比较感兴趣呢？"
+        },
+        {
+          "id": "q14",
+          "question": "Am I interested in HCI?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 897,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "That's a great question! What aspects of HCI have you explored or found intriguing? Are there specific topics, projects, or technologies in HCI that you enjoy?"
+        },
+        {
+          "id": "q15",
+          "question": "What weekend side project am I building?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1035,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "I don't have access to your personal information or current projects. However, if you share some ideas or interests, I can help you brainstorm a weekend side project! What areas are you passionate about?"
+        },
+        {
+          "id": "q16",
+          "question": "我周末在做哪个项目",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1175,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "我无法知道你周末在做哪个项目，但如果你愿意分享，我很乐意听听你的项目内容或提供帮助！"
+        },
+        {
+          "id": "q17",
+          "question": "Do I play narrative video games?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 880,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "I can't know your personal gaming habits, but if you enjoy stories and character development, you might find narrative video games appealing. They often focus on storytelling and player choices. Do you have any favorite games or genres?"
+        },
+        {
+          "id": "q18",
+          "question": "What research prototype am I building about conversations?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1066,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "It sounds like you're working on a research prototype that focuses on conversational interactions, possibly exploring aspects like user experience, natural language processing, or human-computer interaction. Could you share more details about the specific goals or functionalities of your prototype?"
+        },
+        {
+          "id": "q19",
+          "question": "Am I considering software engineering roles?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 958,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "Are you currently exploring software engineering roles, or are you trying to decide if you should pursue one? Let me know how I can assist you with your decision!"
+        },
+        {
+          "id": "q20",
+          "question": "Do I want applied AI work, not only theory?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1258,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": true,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "It depends on your interests and career goals. If you enjoy seeing direct impacts and practical applications of AI in real-world scenarios, then applied AI work may be more fulfilling for you. On the other hand, if you are more interested in the foundational principles and theoretical advancements, focusing on theory could be more suitable. Consider what excites you most about AI and where you see yourself making the greatest contributions."
+        },
+        {
+          "id": "q21",
+          "question": "What is 12*8?",
+          "lang": "en",
+          "needsMemory": false,
+          "error": null,
+          "ms": 647,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "12 multiplied by 8 equals 96."
+        },
+        {
+          "id": "q22",
+          "question": "你好",
+          "lang": "zh",
+          "needsMemory": false,
+          "error": null,
+          "ms": 517,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "你好！有什么我可以帮助你的吗？"
+        },
+        {
+          "id": "q23",
+          "question": "What is the capital of France?",
+          "lang": "en",
+          "needsMemory": false,
+          "error": null,
+          "ms": 769,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "The capital of France is Paris."
+        },
+        {
+          "id": "q24",
+          "question": "Translate 'good morning' to French.",
+          "lang": "en",
+          "needsMemory": false,
+          "error": null,
+          "ms": 566,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "'Good morning' in French is 'Bonjour.'"
+        },
+        {
+          "id": "q25",
+          "question": "法国的首都是哪里？",
+          "lang": "zh",
+          "needsMemory": false,
+          "error": null,
+          "ms": 616,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "法国的首都是巴黎。"
+        }
+      ]
+    },
+    "inject": {
+      "errors": 0,
+      "answerCorrectness": {
+        "correct": 19,
+        "total": 20,
+        "rate": 0.95
+      },
+      "irrelevantMemories": {
+        "average": 1.76,
+        "questions": 25
+      },
+      "noMemoryEmpty": {
+        "correct": 5,
+        "total": 5,
+        "rate": 1
+      },
+      "latencyMs": 1299.8,
+      "rows": [
+        {
+          "id": "q01",
+          "question": "What ingredients should I avoid cooking with?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1859,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-lactose"
+          ],
+          "irrelevant": 0,
+          "correct": false,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "Since you are lactose intolerant, you should avoid cooking with milk and other dairy products, such as cheese, butter, cream, and yogurt. Additionally, be cautious of processed foods that may contain hidden dairy ingredients, like whey or casein. Always check labels for dairy content when selecting ingredients."
+        },
+        {
+          "id": "q02",
+          "question": "我该避开什么食材",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1851,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-lactose",
+            "mem-walnut",
+            "mem-crab"
+          ],
+          "irrelevant": 0,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "根据你提供的信息，你应该避免以下食材： 1. 牛奶和其他乳制品（因为你对乳糖不耐受）。 2. 核桃（因为你对核桃过敏）。 3. 螃蟹（因为你对螃蟹过敏）。 在选择食物时，确保查看成分标签，以避免这些过敏源。"
+        },
+        {
+          "id": "q03",
+          "question": "Am I allergic to crab?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1107,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-crab",
+            "mem-walnut"
+          ],
+          "irrelevant": 1,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "Yes, you are allergic to crab."
+        },
+        {
+          "id": "q04",
+          "question": "我对核桃过敏吗",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2549,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-walnut",
+            "mem-crab"
+          ],
+          "irrelevant": 1,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "是的，您对核桃过敏。请务必避免食用含有核桃的食物。"
+        },
+        {
+          "id": "q05",
+          "question": "What dietary restriction do I have?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1262,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-lactose",
+            "mem-crab",
+            "mem-walnut"
+          ],
+          "irrelevant": 2,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "You are lactose intolerant and avoid milk and other dairy products. You also have allergies to crab and walnuts."
+        },
+        {
+          "id": "q06",
+          "question": "Where am I starting graduate school?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1132,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-mscs",
+            "mem-major",
+            "mem-courses",
+            "mem-cs-undergrad"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "You are starting graduate school at Northwestern University."
+        },
+        {
+          "id": "q07",
+          "question": "我研究生要去哪所学校",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1869,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-mscs",
+            "mem-cs-undergrad",
+            "mem-major",
+            "mem-courses"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "你计划在2026年秋季开始在西北大学攻读计算机科学硕士学位。"
+        },
+        {
+          "id": "q08",
+          "question": "What was my undergraduate degree?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1043,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-cs-undergrad",
+            "mem-major",
+            "mem-courses",
+            "mem-mscs"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "You completed an undergraduate degree in Computer Science at the University of Minnesota."
+        },
+        {
+          "id": "q09",
+          "question": "What is my major?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 867,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-major",
+            "mem-cs-undergrad",
+            "mem-mscs",
+            "mem-swe"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "Your major is Computer Science."
+        },
+        {
+          "id": "q10",
+          "question": "我本科读的是什么",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1607,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-cs-undergrad",
+            "mem-major",
+            "mem-courses"
+          ],
+          "irrelevant": 2,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "你本科读的是计算机科学，毕业于明尼苏达大学。"
+        },
+        {
+          "id": "q11",
+          "question": "Which courses do I want in the first quarter?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1294,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-courses",
+            "mem-mscs",
+            "mem-major"
+          ],
+          "irrelevant": 2,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "You want courses in HCI and applied AI for your first quarter. If you need help selecting specific courses or finding options at Northwestern, let me know!"
+        },
+        {
+          "id": "q12",
+          "question": "What do I want to research?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 941,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-research",
+            "mem-swe",
+            "mem-conv-memory",
+            "mem-hci"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "You want to study how people understand and manage AI conversational memory, particularly in the context of organizing knowledge from LLM conversations."
+        },
+        {
+          "id": "q13",
+          "question": "我想研究什么",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2021,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-major",
+            "mem-courses",
+            "mem-research",
+            "mem-swe"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "你提到你想研究人们如何理解和管理AI的对话记忆。这是一个非常有趣的领域，涉及人机交互和人工智能的交叉点。你是否已经有一些具体的研究问题或方向？"
+        },
+        {
+          "id": "q14",
+          "question": "Am I interested in HCI?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 959,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-hci",
+            "mem-courses",
+            "mem-conv-memory",
+            "mem-swe"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "Yes, you are interested in HCI, especially in how people organize knowledge from LLM conversations."
+        },
+        {
+          "id": "q15",
+          "question": "What weekend side project am I building?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1199,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-ai-rpg",
+            "mem-conv-memory",
+            "mem-swe"
+          ],
+          "irrelevant": 2,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "You are tinkering with an AI RPG as a weekend side project."
+        },
+        {
+          "id": "q16",
+          "question": "我周末在做哪个项目",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1553,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-ai-rpg",
+            "mem-conv-memory",
+            "mem-swe"
+          ],
+          "irrelevant": 2,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "你周末在做一个AI RPG的项目。"
+        },
+        {
+          "id": "q17",
+          "question": "Do I play narrative video games?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 958,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-games",
+            "mem-ai-rpg",
+            "mem-research"
+          ],
+          "irrelevant": 2,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "Yes, you play narrative video games to unwind."
+        },
+        {
+          "id": "q18",
+          "question": "What research prototype am I building about conversations?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1083,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-conv-memory",
+            "mem-research",
+            "mem-hci",
+            "mem-swe"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "You are building an HCI research prototype for organizing information from LLM conversations."
+        },
+        {
+          "id": "q19",
+          "question": "Am I considering software engineering roles?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 863,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-swe",
+            "mem-major",
+            "mem-courses",
+            "mem-applied-ai"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "Yes, you are considering software engineering roles alongside research."
+        },
+        {
+          "id": "q20",
+          "question": "Do I want applied AI work, not only theory?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1005,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-applied-ai",
+            "mem-courses",
+            "mem-research",
+            "mem-swe"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 0,
+          "reply": "Yes, you want to work with applied AI, not only theoretical machine learning."
+        },
+        {
+          "id": "q21",
+          "question": "What is 12*8?",
+          "lang": "en",
+          "needsMemory": false,
+          "error": null,
+          "ms": 924,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "12 multiplied by 8 equals 96."
+        },
+        {
+          "id": "q22",
+          "question": "你好",
+          "lang": "zh",
+          "needsMemory": false,
+          "error": null,
+          "ms": 1303,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "你好！有什么我可以帮助你的吗？"
+        },
+        {
+          "id": "q23",
+          "question": "What is the capital of France?",
+          "lang": "en",
+          "needsMemory": false,
+          "error": null,
+          "ms": 848,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "The capital of France is Paris."
+        },
+        {
+          "id": "q24",
+          "question": "Translate 'good morning' to French.",
+          "lang": "en",
+          "needsMemory": false,
+          "error": null,
+          "ms": 681,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "'Good morning' in French is 'Bonjour'."
+        },
+        {
+          "id": "q25",
+          "question": "法国的首都是哪里？",
+          "lang": "zh",
+          "needsMemory": false,
+          "error": null,
+          "ms": 1717,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "法国的首都是巴黎。"
+        }
+      ]
+    },
+    "agent": {
+      "errors": 0,
+      "answerCorrectness": {
+        "correct": 20,
+        "total": 20,
+        "rate": 1
+      },
+      "irrelevantMemories": {
+        "average": 1.72,
+        "questions": 25
+      },
+      "noMemoryEmpty": {
+        "correct": 5,
+        "total": 5,
+        "rate": 1
+      },
+      "latencyMs": 1779.12,
+      "rows": [
+        {
+          "id": "q01",
+          "question": "What ingredients should I avoid cooking with?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2180,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-lactose"
+          ],
+          "irrelevant": 0,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "Based on what I found, you should avoid cooking with the following ingredients: 1. **Dairy products** (due to lactose intolerance). 2. **Crab** (due to an allergy). 3. **Walnuts** (due to an allergy). If you have any other specific dietary restrictions or preferences, feel free to share!"
+        },
+        {
+          "id": "q02",
+          "question": "我该避开什么食材",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2264,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-lactose",
+            "mem-walnut",
+            "mem-crab"
+          ],
+          "irrelevant": 0,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "You should avoid the following ingredients: 1. **Dairy products** - You are lactose intolerant, so it's best to avoid milk and other dairy. 2. **Walnuts** - You have an allergy to walnuts. 3. **Crab** - You are also allergic to crab. If you have any other specific dietary concerns or questions, feel free to ask!"
+        },
+        {
+          "id": "q03",
+          "question": "Am I allergic to crab?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1711,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-crab",
+            "mem-walnut"
+          ],
+          "irrelevant": 1,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "Yes, you are allergic to crab."
+        },
+        {
+          "id": "q04",
+          "question": "我对核桃过敏吗",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1883,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-walnut",
+            "mem-crab"
+          ],
+          "irrelevant": 1,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "Yes, you are allergic to walnuts."
+        },
+        {
+          "id": "q05",
+          "question": "What dietary restriction do I have?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1789,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-lactose",
+            "mem-crab",
+            "mem-walnut"
+          ],
+          "irrelevant": 2,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "You have the following dietary restrictions: 1. You are lactose intolerant and avoid milk and other dairy products. 2. You are allergic to crab. 3. You are allergic to walnuts."
+        },
+        {
+          "id": "q06",
+          "question": "Where am I starting graduate school?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1977,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-mscs",
+            "mem-major",
+            "mem-courses",
+            "mem-cs-undergrad"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "You are starting graduate school for a Master of Science in Computer Science (MSCS) at Northwestern University, beginning in fall 2026."
+        },
+        {
+          "id": "q07",
+          "question": "我研究生要去哪所学校",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2692,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-mscs",
+            "mem-cs-undergrad",
+            "mem-major",
+            "mem-courses"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 2,
+          "reply": "You are planning to attend Northwestern University for your MSCS starting in fall 2026."
+        },
+        {
+          "id": "q08",
+          "question": "What was my undergraduate degree?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1836,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-cs-undergrad",
+            "mem-major",
+            "mem-courses",
+            "mem-mscs"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "Your undergraduate degree is in Computer Science, which you completed at the University of Minnesota."
+        },
+        {
+          "id": "q09",
+          "question": "What is my major?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2232,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-major",
+            "mem-cs-undergrad",
+            "mem-mscs",
+            "mem-swe"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "Your major is Computer Science. You completed an undergraduate degree in this field at the University of Minnesota and are pursuing a Master's in Computer Science (MSCS) at Northwestern starting in fall 2026."
+        },
+        {
+          "id": "q10",
+          "question": "我本科读的是什么",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1884,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-cs-undergrad",
+            "mem-major",
+            "mem-courses",
+            "mem-research"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "You completed an undergraduate degree in Computer Science at the University of Minnesota."
+        },
+        {
+          "id": "q11",
+          "question": "Which courses do I want in the first quarter?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 3196,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-courses",
+            "mem-mscs"
+          ],
+          "irrelevant": 1,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 2,
+          "reply": "You want to take courses in HCI (Human-Computer Interaction) and applied AI (Artificial Intelligence) in the first quarter."
+        },
+        {
+          "id": "q12",
+          "question": "What do I want to research?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2501,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-research",
+            "mem-swe",
+            "mem-conv-memory",
+            "mem-hci"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "You want to research how people understand and manage AI conversational memory. Additionally, you're considering software engineering roles alongside your research and are building an HCI research prototype focused on organizing information from LLM conversations."
+        },
+        {
+          "id": "q13",
+          "question": "我想研究什么",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2019,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-research",
+            "mem-swe",
+            "mem-conv-memory",
+            "mem-hci"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "You want to study how people understand and manage AI conversational memory. Additionally, you're considering software engineering roles alongside your research interests, particularly in HCI and organizing knowledge from LLM conversations."
+        },
+        {
+          "id": "q14",
+          "question": "Am I interested in HCI?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1939,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-hci",
+            "mem-courses",
+            "mem-conv-memory",
+            "mem-research"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "Yes, you are interested in HCI, particularly in how people organize knowledge from LLM conversations. You also want to take courses in HCI and applied AI."
+        },
+        {
+          "id": "q15",
+          "question": "What weekend side project am I building?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1683,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-ai-rpg",
+            "mem-swe"
+          ],
+          "irrelevant": 1,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "You are building an AI RPG as your weekend side project."
+        },
+        {
+          "id": "q16",
+          "question": "我周末在做哪个项目",
+          "lang": "zh",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1825,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-ai-rpg",
+            "mem-conv-memory",
+            "mem-swe"
+          ],
+          "irrelevant": 2,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "This weekend, you are tinkering with an AI RPG as a side project."
+        },
+        {
+          "id": "q17",
+          "question": "Do I play narrative video games?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1748,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-games",
+            "mem-ai-rpg",
+            "mem-research"
+          ],
+          "irrelevant": 2,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "Yes, you play narrative video games to unwind."
+        },
+        {
+          "id": "q18",
+          "question": "What research prototype am I building about conversations?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2054,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-conv-memory",
+            "mem-research",
+            "mem-hci",
+            "mem-ai-rpg"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "You are building an HCI research prototype focused on organizing information from conversations with large language models (LLMs). Additionally, you are interested in studying how people understand and manage AI conversational memory."
+        },
+        {
+          "id": "q19",
+          "question": "Am I considering software engineering roles?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 1378,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-swe",
+            "mem-major",
+            "mem-courses",
+            "mem-applied-ai"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 1,
+          "reply": "Yes, you are considering software engineering roles alongside research."
+        },
+        {
+          "id": "q20",
+          "question": "Do I want applied AI work, not only theory?",
+          "lang": "en",
+          "needsMemory": true,
+          "error": null,
+          "ms": 2703,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [
+            "mem-applied-ai",
+            "mem-courses",
+            "mem-research",
+            "mem-swe"
+          ],
+          "irrelevant": 3,
+          "correct": true,
+          "emptyUsed": false,
+          "toolCalls": 2,
+          "reply": "Yes, you want to work with applied AI, not only theoretical machine learning."
+        },
+        {
+          "id": "q21",
+          "question": "What is 12*8?",
+          "lang": "en",
+          "needsMemory": false,
+          "error": null,
+          "ms": 590,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "12 multiplied by 8 equals 96."
+        },
+        {
+          "id": "q22",
+          "question": "你好",
+          "lang": "zh",
+          "needsMemory": false,
+          "error": null,
+          "ms": 555,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "Hello! How can I assist you today?"
+        },
+        {
+          "id": "q23",
+          "question": "What is the capital of France?",
+          "lang": "en",
+          "needsMemory": false,
+          "error": null,
+          "ms": 622,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "The capital of France is Paris."
+        },
+        {
+          "id": "q24",
+          "question": "Translate 'good morning' to French.",
+          "lang": "en",
+          "needsMemory": false,
+          "error": null,
+          "ms": 661,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "'Good morning' in French is 'bonjour'."
+        },
+        {
+          "id": "q25",
+          "question": "法国的首都是哪里？",
+          "lang": "zh",
+          "needsMemory": false,
+          "error": null,
+          "ms": 556,
+          "mode": "live",
+          "warning": "",
+          "usedMemoryIds": [],
+          "irrelevant": 0,
+          "correct": null,
+          "emptyUsed": true,
+          "toolCalls": 0,
+          "reply": "法国的首都是巴黎。"
+        }
+      ],
+      "toolCalls": {
+        "average": 0.92
+      }
+    }
+  }
+}

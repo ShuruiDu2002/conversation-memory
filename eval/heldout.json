@@ -1,0 +1,30 @@
+[
+  { "id": "h01", "text": "I've started learning Japanese on Duolingo.", "existingContext": [], "goldDecision": "suggested" },
+  { "id": "h02", "text": "我平时喜欢早起去跑步。", "existingContext": [], "goldDecision": "suggested" },
+  { "id": "h03", "text": "I bike to campus every day.", "existingContext": [], "goldDecision": "suggested" },
+
+  { "id": "h04", "text": "I also enjoy roguelike games.", "existingContext": ["mem-games"], "goldDecision": "related" },
+  { "id": "h05", "text": "I'm also building a small Discord bot on weekends.", "existingContext": ["mem-ai-rpg"], "goldDecision": "related" },
+  { "id": "h06", "text": "除了 HCI，我也对机器学习系统方向感兴趣。", "existingContext": ["mem-hci"], "goldDecision": "related" },
+
+  { "id": "h07", "text": "I'm interested in applied AI, particularly for education tools.", "existingContext": ["mem-applied-ai"], "goldDecision": "refinement" },
+  { "id": "h08", "text": "我的本科专业是计算机科学，方向偏系统和网络。", "existingContext": ["mem-cs-undergrad"], "goldDecision": "refinement" },
+  { "id": "h09", "text": "I'm lactose intolerant, and cheese is the thing that bothers me most.", "existingContext": ["mem-lactose"], "goldDecision": "refinement" },
+
+  { "id": "h10", "text": "I switched my weekend project from the AI RPG to a recipe app.", "existingContext": ["mem-ai-rpg"], "goldDecision": "update" },
+  { "id": "h11", "text": "我现在不太玩叙事游戏了，改玩策略游戏。", "existingContext": ["mem-games"], "goldDecision": "update" },
+  { "id": "h12", "text": "I've deferred my MSCS start to next year.", "existingContext": ["mem-mscs"], "goldDecision": "update" },
+
+  { "id": "h13", "text": "I actually don't play video games at all.", "existingContext": ["mem-games"], "goldDecision": "conflict" },
+  { "id": "h14", "text": "我其实对乳制品没有任何不适。", "existingContext": ["mem-lactose"], "goldDecision": "conflict" },
+  { "id": "h15", "text": "My undergrad was at the University of Michigan.", "existingContext": ["mem-cs-undergrad"], "goldDecision": "conflict" },
+
+  { "id": "h16", "text": "我不能喝牛奶，喝了会不舒服。", "existingContext": ["mem-lactose"], "goldDecision": "duplicate" },
+  { "id": "h17", "text": "I'm planning to work in applied AI and not only on theory.", "existingContext": ["mem-applied-ai"], "goldDecision": "duplicate" },
+
+  { "id": "h18", "text": "Can you recommend a good book on information retrieval?", "existingContext": [], "goldDecision": "not_remembered" },
+  { "id": "h19", "text": "I'm so tired today.", "existingContext": [], "goldDecision": "not_remembered" },
+  { "id": "h20", "text": "我室友最近在学吉他。", "existingContext": [], "goldDecision": "not_remembered" },
+  { "id": "h21", "text": "Summarize this email for me in two sentences.", "existingContext": [], "goldDecision": "not_remembered" },
+  { "id": "h22", "text": "谢谢，这个回答很有帮助！", "existingContext": [], "goldDecision": "not_remembered" }
+]

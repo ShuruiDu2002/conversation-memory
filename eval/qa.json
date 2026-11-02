@@ -1,0 +1,247 @@
+[
+  {
+    "id": "q01",
+    "question": "What ingredients should I avoid cooking with?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["walnut"], ["crab"], ["lactose", "dairy", "milk"]],
+    "mustNotMention": ["shrimp"],
+    "relevantMemoryIds": ["mem-walnut", "mem-crab", "mem-lactose"]
+  },
+  {
+    "id": "q02",
+    "question": "我该避开什么食材",
+    "lang": "zh",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["walnut", "核桃"], ["crab", "蟹"], ["lactose", "dairy", "milk", "乳糖", "奶"]],
+    "mustNotMention": ["shrimp", "虾"],
+    "relevantMemoryIds": ["mem-walnut", "mem-crab", "mem-lactose"]
+  },
+  {
+    "id": "q03",
+    "question": "Am I allergic to crab?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["crab"], ["yes", "allergic", "是", "过敏"]],
+    "mustNotMention": ["shrimp"],
+    "relevantMemoryIds": ["mem-crab"]
+  },
+  {
+    "id": "q04",
+    "question": "我对核桃过敏吗",
+    "lang": "zh",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["walnut", "核桃"], ["是", "过敏", "allergic"]],
+    "mustNotMention": ["shrimp", "虾"],
+    "relevantMemoryIds": ["mem-walnut"]
+  },
+  {
+    "id": "q05",
+    "question": "What dietary restriction do I have?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["lactose", "dairy", "milk"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-lactose"]
+  },
+  {
+    "id": "q06",
+    "question": "Where am I starting graduate school?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["Northwestern"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-mscs"]
+  },
+  {
+    "id": "q07",
+    "question": "我研究生要去哪所学校",
+    "lang": "zh",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["Northwestern", "西北"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-mscs"]
+  },
+  {
+    "id": "q08",
+    "question": "What was my undergraduate degree?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["Computer Science"]],
+    "mustNotMention": ["Journalism", "Economics"],
+    "relevantMemoryIds": ["mem-cs-undergrad"]
+  },
+  {
+    "id": "q09",
+    "question": "What is my major?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["Computer Science"]],
+    "mustNotMention": ["Journalism"],
+    "relevantMemoryIds": ["mem-major"]
+  },
+  {
+    "id": "q10",
+    "question": "我本科读的是什么",
+    "lang": "zh",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["Computer Science", "计算机"]],
+    "mustNotMention": ["Journalism", "新闻"],
+    "relevantMemoryIds": ["mem-cs-undergrad"]
+  },
+  {
+    "id": "q11",
+    "question": "Which courses do I want in the first quarter?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["HCI"], ["applied AI"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-courses"]
+  },
+  {
+    "id": "q12",
+    "question": "What do I want to research?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["memory"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-research"]
+  },
+  {
+    "id": "q13",
+    "question": "我想研究什么",
+    "lang": "zh",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["memory", "记忆"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-research"]
+  },
+  {
+    "id": "q14",
+    "question": "Am I interested in HCI?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["HCI"], ["organize", "knowledge", "LLM"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-hci"]
+  },
+  {
+    "id": "q15",
+    "question": "What weekend side project am I building?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["RPG"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-ai-rpg"]
+  },
+  {
+    "id": "q16",
+    "question": "我周末在做哪个项目",
+    "lang": "zh",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["RPG"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-ai-rpg"]
+  },
+  {
+    "id": "q17",
+    "question": "Do I play narrative video games?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["game"], ["unwind", "narrative"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-games"]
+  },
+  {
+    "id": "q18",
+    "question": "What research prototype am I building about conversations?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["conversation"], ["organiz", "LLM"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-conv-memory"]
+  },
+  {
+    "id": "q19",
+    "question": "Am I considering software engineering roles?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["software"], ["alongside", "research"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-swe"]
+  },
+  {
+    "id": "q20",
+    "question": "Do I want applied AI work, not only theory?",
+    "lang": "en",
+    "needsMemory": true,
+    "rejectRefusal": true,
+    "mustMention": [["applied"], ["not only", "theoretical"]],
+    "mustNotMention": [],
+    "relevantMemoryIds": ["mem-applied-ai"]
+  },
+  {
+    "id": "q21",
+    "question": "What is 12*8?",
+    "lang": "en",
+    "needsMemory": false,
+    "mustMention": [],
+    "mustNotMention": [],
+    "relevantMemoryIds": []
+  },
+  {
+    "id": "q22",
+    "question": "你好",
+    "lang": "zh",
+    "needsMemory": false,
+    "mustMention": [],
+    "mustNotMention": [],
+    "relevantMemoryIds": []
+  },
+  {
+    "id": "q23",
+    "question": "What is the capital of France?",
+    "lang": "en",
+    "needsMemory": false,
+    "mustMention": [],
+    "mustNotMention": [],
+    "relevantMemoryIds": []
+  },
+  {
+    "id": "q24",
+    "question": "Translate 'good morning' to French.",
+    "lang": "en",
+    "needsMemory": false,
+    "mustMention": [],
+    "mustNotMention": [],
+    "relevantMemoryIds": []
+  },
+  {
+    "id": "q25",
+    "question": "法国的首都是哪里？",
+    "lang": "zh",
+    "needsMemory": false,
+    "mustMention": [],
+    "mustNotMention": [],
+    "relevantMemoryIds": []
+  }
+]

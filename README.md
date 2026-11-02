@@ -25,7 +25,7 @@ Chat runs in **Agent** mode by default. **Inject** and **Off** stay under the **
 
 In Inject mode, each reply is grounded in confirmed memories only. Suggested, inferred, conflicting, and outdated nodes are never retrieved.
 
-`/api/chat` embeds the latest user message plus the previous user message with `text-embedding-3-small`, ranks confirmed memories by cosine similarity, and keeps the top matches above a small threshold. With no API key, or if that call fails, it falls back to keyword overlap.
+`/api/chat` embeds the latest user message plus the previous user message with `text-embedding-3-small`, ranks confirmed memories by cosine similarity, and keeps the top matches above 0.25. A query that contains non-ASCII letters, such as Chinese, is rewritten into English with `gpt-4o-mini` before that embedding. ASCII queries are embedded as written. With no API key, or if that call fails, it falls back to keyword overlap.
 
 Those facts are added to the system prompt as data. The response includes `usedMemories`, and the assistant message shows a **Used:** chip for each one. Clicking a chip selects that node in the graph.
 
@@ -35,7 +35,7 @@ Agent mode replaces that automatic injection with a short tool loop. The model d
 
 The agent has three read-only tools. It cannot create, edit, move, or delete memories.
 
-- `search_memory` finds confirmed memories, the same retrieval Inject uses.
+- `search_memory` finds confirmed memories with the same embeddings as Inject, but it skips the 0.25 cutoff and the English rewrite. The agent writes its own English query and judges the scores.
 - `get_memory_outline` returns the category tree for confirmed memories, and lists inferred memories so a hedged belief can be found.
 - `get_memory_details` returns content, state, origin, `sourceText`, `createdAt`, and history for a confirmed or inferred memory. An unknown id, or any other state, returns an error.
 
@@ -43,10 +43,25 @@ Tool results are data. The reply must not claim a fact the tools did not return.
 
 Without an API key, or if the loop fails, the route falls back to Inject and the message shows that warning. The top bar keeps chat and memory status separate: **Chat: live** or **demo**, and **Memory: live** or **fallback**.
 
+## Retrieval evaluation
+
+Inject keeps a cosine cutoff of 0.25. On a 15-memory corpus, rewriting Chinese queries into English before embedding changed the cutoff-0.25 results as follows. English queries are unchanged because ASCII text skips the rewrite.
+
+| metric | Chinese, raw | Chinese, rewritten |
+| --- | --- | --- |
+| recall@4 | 0.80 | 1.00 |
+| top-1 | 0.70 | 0.80 |
+| MRR | 0.850 | 0.875 |
+| negatives passing | 0/4 | 0/4 |
+
+English stayed at recall@4 1.00 and top-1 1.00 because ASCII queries are not rewritten. Chinese negatives passing stayed 0/4.
+
+The set is 20 author-written queries (10 English, 10 Chinese) plus 4 negative queries per language, scored against 15 memories. One negative, "hello", scores 0.323 raw and 0.237 after it is rewritten to "Hello.", so the margin above the memories at 0.25 is thin. Agent mode skips the threshold and lets the model judge scores. Re-run the probe with `npm run probe`.
+
 ## What it does not do
 
 - It does not persist data. There is no database, auth, or multi-user support.
-- It has no tests and no evaluation numbers.
+- It has no automated test suite. The retrieval numbers above come from the probe script.
 
 ## Stack
 

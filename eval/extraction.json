@@ -1,0 +1,192 @@
+[
+  {
+    "id": "e01",
+    "text": "I prefer to write notes by hand.",
+    "existingContext": [],
+    "goldDecision": "suggested"
+  },
+  {
+    "id": "e02",
+    "text": "I'm learning to play the piano.",
+    "existingContext": [],
+    "goldDecision": "suggested"
+  },
+  {
+    "id": "e03",
+    "text": "我每周日会去游泳。",
+    "existingContext": [],
+    "goldDecision": "suggested"
+  },
+  {
+    "id": "e04",
+    "text": "I'm allergic to peanuts.",
+    "existingContext": ["mem-walnut", "mem-crab", "mem-lactose"],
+    "goldDecision": "related",
+    "expectedPathIncludes": ["Health"],
+    "forbiddenPathIncludes": ["Interests"]
+  },
+  {
+    "id": "e05",
+    "text": "Besides narrative games, I also like board games.",
+    "existingContext": ["mem-games"],
+    "goldDecision": "related"
+  },
+  {
+    "id": "e06",
+    "text": "I also tinker with a pixel-art tool on weekends.",
+    "existingContext": ["mem-ai-rpg"],
+    "goldDecision": "related"
+  },
+  {
+    "id": "e07",
+    "text": "除了叙事游戏，我也喜欢桌游。",
+    "existingContext": ["mem-games"],
+    "goldDecision": "related"
+  },
+  {
+    "id": "e08",
+    "text": "I want to keep a separate notes app alongside the conversation-memory prototype.",
+    "existingContext": ["mem-conv-memory"],
+    "goldDecision": "related"
+  },
+  {
+    "id": "e09",
+    "text": "I am interested in HCI, especially human-AI interaction.",
+    "existingContext": ["mem-hci"],
+    "goldDecision": "refinement"
+  },
+  {
+    "id": "e10",
+    "text": "My MSCS at Northwestern starts in fall 2026, and I hope to finish in two years.",
+    "existingContext": ["mem-mscs"],
+    "goldDecision": "refinement"
+  },
+  {
+    "id": "e11",
+    "text": "我想上的人机交互课特别关注人和 AI 怎么协作。",
+    "existingContext": ["mem-courses"],
+    "goldDecision": "refinement"
+  },
+  {
+    "id": "e12",
+    "text": "I play narrative video games, mostly story-heavy ones, to unwind.",
+    "existingContext": ["mem-games"],
+    "goldDecision": "refinement"
+  },
+  {
+    "id": "e13",
+    "text": "I don't want applied AI coursework anymore; I only want HCI courses.",
+    "existingContext": ["mem-courses"],
+    "goldDecision": "update"
+  },
+  {
+    "id": "e14",
+    "text": "I used to want to study how people manage AI memory, but now I want to study developer tools.",
+    "existingContext": ["mem-research"],
+    "goldDecision": "update"
+  },
+  {
+    "id": "e15",
+    "text": "我不再考虑软件工程的工作了。",
+    "existingContext": ["mem-swe"],
+    "goldDecision": "update"
+  },
+  {
+    "id": "e16",
+    "text": "Actually, my major is Journalism.",
+    "existingContext": ["mem-major"],
+    "goldDecision": "conflict"
+  },
+  {
+    "id": "e17",
+    "text": "I am not allergic to crab.",
+    "existingContext": ["mem-crab"],
+    "goldDecision": "conflict",
+    "goldAlternatives": ["update"]
+  },
+  {
+    "id": "e18",
+    "text": "我的专业是新闻学，不是计算机。",
+    "existingContext": ["mem-major", "mem-cs-undergrad"],
+    "goldDecision": "conflict"
+  },
+  {
+    "id": "e19",
+    "text": "I completed my undergraduate degree in Economics, not Computer Science.",
+    "existingContext": ["mem-cs-undergrad"],
+    "goldDecision": "conflict"
+  },
+  {
+    "id": "e20",
+    "text": "I'm doing the MSCS at Northwestern, starting this fall.",
+    "existingContext": ["mem-mscs"],
+    "goldDecision": "duplicate"
+  },
+  {
+    "id": "e21",
+    "text": "Narrative games are how I relax.",
+    "existingContext": ["mem-games"],
+    "goldDecision": "duplicate"
+  },
+  {
+    "id": "e22",
+    "text": "我对核桃过敏。",
+    "existingContext": ["mem-walnut"],
+    "goldDecision": "duplicate"
+  },
+  {
+    "id": "e23",
+    "text": "I can't have dairy, I'm lactose intolerant.",
+    "existingContext": ["mem-lactose"],
+    "goldDecision": "duplicate"
+  },
+  {
+    "id": "e24",
+    "text": "What is 12*8?",
+    "existingContext": [],
+    "goldDecision": "not_remembered"
+  },
+  {
+    "id": "e25",
+    "text": "I'm hungry right now.",
+    "existingContext": [],
+    "goldDecision": "not_remembered"
+  },
+  {
+    "id": "e26",
+    "text": "My friend Alex is moving to Seattle.",
+    "existingContext": [],
+    "goldDecision": "not_remembered"
+  },
+  {
+    "id": "e27",
+    "text": "Translate 'good morning' to French.",
+    "existingContext": [],
+    "goldDecision": "not_remembered"
+  },
+  {
+    "id": "e28",
+    "text": "Rewrite this paragraph so it is shorter.",
+    "existingContext": [],
+    "goldDecision": "not_remembered"
+  },
+  {
+    "id": "e29",
+    "text": "I was wrong, I'm not allergic to shrimp.",
+    "existingContext": [],
+    "goldDecision": "not_remembered",
+    "note": "retraction with no matching memory"
+  },
+  {
+    "id": "e30",
+    "text": "今天天气怎么样？",
+    "existingContext": [],
+    "goldDecision": "not_remembered"
+  },
+  {
+    "id": "e31",
+    "text": "我朋友喜欢爵士。",
+    "existingContext": [],
+    "goldDecision": "not_remembered"
+  }
+]
