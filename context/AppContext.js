@@ -26,14 +26,31 @@ function updateReason(reason) {
 }
 
 function applyContentAndTitle(nodes, { id, content, title, fromTitle, reason }) {
-  let next = content ? updateNodeContent(nodes, id, content, reason) : nodes;
-  next = setNodeState(next, id, "confirmed");
+  const existing = nodes.find((node) => node.id === id);
+  if (!existing) return nodes;
   const toTitle = typeof title === "string" ? title.trim() : "";
-  if (!toTitle) return next;
-  const current = next.find((node) => node.id === id);
-  if (!current || toTitle === current.title) return next;
-  const previous = fromTitle || current.title || "";
-  return updateNodeTitle(next, id, toTitle, `Renamed from ${previous} to ${toTitle}`);
+  const previousTitle = String(fromTitle || existing.title || "").trim();
+  const titleChanges = Boolean(toTitle) && toTitle !== existing.title;
+  const nextContent = typeof content === "string" ? content : "";
+  const contentChanges = Boolean(nextContent) && nextContent !== existing.content;
+  const contentReason = titleChanges
+    ? `${String(reason || "").replace(/[.\s]+$/, "")}; renamed from ${previousTitle} to ${toTitle}`
+    : reason;
+  let next = contentChanges ? updateNodeContent(nodes, id, nextContent, contentReason) : nodes;
+  if (contentChanges && titleChanges) next = stampPreviousTitle(next, id, previousTitle);
+  next = setNodeState(next, id, "confirmed");
+  if (!titleChanges) return next;
+  if (contentChanges) return updateNodeTitle(next, id, toTitle);
+  return updateNodeTitle(next, id, toTitle, { title: previousTitle });
+}
+
+function stampPreviousTitle(nodes, id, previousTitle) {
+  return nodes.map((node) => {
+    if (node.id !== id || !node.history?.length) return node;
+    const history = node.history.slice();
+    history[history.length - 1] = { ...history[history.length - 1], title: previousTitle };
+    return { ...node, history };
+  });
 }
 const STORAGE_KEY = "conversation-memory:v1";
 

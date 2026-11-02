@@ -10,6 +10,13 @@ import {
 import { ME_ID } from "@/lib/models";
 import { countMemories, getChildren, getNode, getPathTitles } from "@/lib/tree";
 
+function titleAfter(history, index, currentTitle) {
+  for (let i = index + 1; i < history.length; i += 1) {
+    if (history[i].title) return history[i].title;
+  }
+  return currentTitle;
+}
+
 const STATE_LABEL = {
   confirmed: "Confirmed",
   suggested: "Suggested",
@@ -190,13 +197,18 @@ export default function MemoryDetail() {
             History
           </div>
           <ul className="history">
-            {node.history.map((entry, index) => (
-              <li key={`${entry.at}-${index}`}>
-                <time>{formatDisplayDate(entry.at, true)}</time>
-                {entry.content}
-                {entry.reason && <div className="muted">{entry.reason}</div>}
-              </li>
-            ))}
+            {node.history.map((entry, index) => {
+              const renameOnly = Boolean(entry.title) && !entry.content;
+              return (
+                <li key={`${entry.at}-${index}`}>
+                  <time>{formatDisplayDate(entry.at, true)}</time>
+                  {renameOnly
+                    ? `Renamed: ${entry.title} -> ${titleAfter(node.history, index, node.title)}`
+                    : entry.content}
+                  {!renameOnly && entry.reason && <div className="muted">{entry.reason}</div>}
+                </li>
+              );
+            })}
             <li>
               <time>{formatDisplayDate(node.updatedAt, true)}</time>
               {node.content}
