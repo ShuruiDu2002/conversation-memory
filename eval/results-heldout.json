@@ -1,0 +1,1039 @@
+{
+  "date": "2026-11-02",
+  "commit": "91e11e1",
+  "base": "http://localhost:3000",
+  "models": {
+    "extract": "gpt-4o-mini (temperature 0.2)",
+    "chatInject": "gpt-4o-mini (temperature 0.6)",
+    "chatAgent": "gpt-4o-mini (temperature 0.2 with tools)",
+    "embeddings": "text-embedding-3-small",
+    "heuristic": "lib/heuristicExtract.js keyword baseline"
+  },
+  "counts": {
+    "nodes": 22,
+    "extractionTurns": 22
+  },
+  "note": "Each turn was sent once at the server's normal temperature. Results vary run to run. The held-out set is for reporting only. Prompts, labels and normalization are not tuned against it.",
+  "extraction": {
+    "heuristic": {
+      "correct": 5,
+      "total": 22,
+      "errors": 0,
+      "rate": 0.22727272727272727,
+      "lenient": {
+        "correct": 5,
+        "total": 22,
+        "rate": 0.22727272727272727
+      },
+      "outcome": {
+        "correct": 6,
+        "total": 22,
+        "rate": 0.2727272727272727
+      },
+      "categoryPlacement": {
+        "correct": 0,
+        "total": 0,
+        "rate": null
+      },
+      "perDecision": {
+        "suggested": {
+          "correct": 0,
+          "total": 3,
+          "rate": 0
+        },
+        "related": {
+          "correct": 0,
+          "total": 3,
+          "rate": 0
+        },
+        "refinement": {
+          "correct": 0,
+          "total": 3,
+          "rate": 0
+        },
+        "update": {
+          "correct": 0,
+          "total": 3,
+          "rate": 0
+        },
+        "conflict": {
+          "correct": 0,
+          "total": 3,
+          "rate": 0
+        },
+        "duplicate": {
+          "correct": 0,
+          "total": 2,
+          "rate": 0
+        },
+        "not_remembered": {
+          "correct": 5,
+          "total": 5,
+          "rate": 1
+        }
+      },
+      "matrix": {
+        "suggested": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 3,
+          "other": 0
+        },
+        "related": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 3,
+          "other": 0
+        },
+        "refinement": {
+          "suggested": 1,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 2,
+          "other": 0
+        },
+        "update": {
+          "suggested": 2,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 1,
+          "other": 0
+        },
+        "conflict": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 3,
+          "other": 0
+        },
+        "duplicate": {
+          "suggested": 1,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 1,
+          "other": 0
+        },
+        "not_remembered": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 5,
+          "other": 0
+        }
+      },
+      "rows": [
+        {
+          "id": "h01",
+          "text": "I've started learning Japanese on Duolingo.",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h02",
+          "text": "我平时喜欢早起去跑步。",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h03",
+          "text": "I bike to campus every day.",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h04",
+          "text": "I also enjoy roguelike games.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h05",
+          "text": "I'm also building a small Discord bot on weekends.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h06",
+          "text": "除了 HCI，我也对机器学习系统方向感兴趣。",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h07",
+          "text": "I'm interested in applied AI, particularly for education tools.",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h08",
+          "text": "我的本科专业是计算机科学，方向偏系统和网络。",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h09",
+          "text": "I'm lactose intolerant, and cheese is the thing that bothers me most.",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h10",
+          "text": "I switched my weekend project from the AI RPG to a recipe app.",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h11",
+          "text": "我现在不太玩叙事游戏了，改玩策略游戏。",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h12",
+          "text": "I've deferred my MSCS start to next year.",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h13",
+          "text": "I actually don't play video games at all.",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h14",
+          "text": "我其实对乳制品没有任何不适。",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h15",
+          "text": "My undergrad was at the University of Michigan.",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h16",
+          "text": "我不能喝牛奶，喝了会不舒服。",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h17",
+          "text": "I'm planning to work in applied AI and not only on theory.",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h18",
+          "text": "Can you recommend a good book on information retrieval?",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h19",
+          "text": "I'm so tired today.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h20",
+          "text": "我室友最近在学吉他。",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h21",
+          "text": "Summarize this email for me in two sentences.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        },
+        {
+          "id": "h22",
+          "text": "谢谢，这个回答很有帮助！",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null
+        }
+      ]
+    },
+    "live": {
+      "correct": 17,
+      "total": 22,
+      "errors": 0,
+      "rate": 0.7727272727272727,
+      "lenient": {
+        "correct": 17,
+        "total": 22,
+        "rate": 0.7727272727272727
+      },
+      "outcome": {
+        "correct": 18,
+        "total": 22,
+        "rate": 0.8181818181818182
+      },
+      "categoryPlacement": {
+        "correct": 0,
+        "total": 0,
+        "rate": null
+      },
+      "perDecision": {
+        "suggested": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1
+        },
+        "related": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1
+        },
+        "refinement": {
+          "correct": 0,
+          "total": 3,
+          "rate": 0
+        },
+        "update": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1
+        },
+        "conflict": {
+          "correct": 1,
+          "total": 3,
+          "rate": 0.3333333333333333
+        },
+        "duplicate": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1
+        },
+        "not_remembered": {
+          "correct": 5,
+          "total": 5,
+          "rate": 1
+        }
+      },
+      "matrix": {
+        "suggested": {
+          "suggested": 3,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 0,
+          "other": 0
+        },
+        "related": {
+          "suggested": 0,
+          "related": 3,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 0,
+          "other": 0
+        },
+        "refinement": {
+          "suggested": 0,
+          "related": 1,
+          "refinement": 0,
+          "update": 1,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 1,
+          "other": 0
+        },
+        "update": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 3,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 0,
+          "other": 0
+        },
+        "conflict": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 2,
+          "conflict": 1,
+          "duplicate": 0,
+          "not_remembered": 0,
+          "other": 0
+        },
+        "duplicate": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 2,
+          "not_remembered": 0,
+          "other": 0
+        },
+        "not_remembered": {
+          "suggested": 0,
+          "related": 0,
+          "refinement": 0,
+          "update": 0,
+          "conflict": 0,
+          "duplicate": 0,
+          "not_remembered": 5,
+          "other": 0
+        }
+      },
+      "rows": [
+        {
+          "id": "h01",
+          "text": "I've started learning Japanese on Duolingo.",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2914,
+          "mode": "live",
+          "rawDecision": "suggested",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Learning Japanese",
+              "content": "User has started learning Japanese on Duolingo."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h02",
+          "text": "我平时喜欢早起去跑步。",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2579,
+          "mode": "live",
+          "rawDecision": "suggested",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Early Morning Running",
+              "content": "User usually likes to wake up early to go running."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h03",
+          "text": "I bike to campus every day.",
+          "gold": "suggested",
+          "alternatives": [],
+          "predicted": "suggested",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2463,
+          "mode": "live",
+          "rawDecision": "suggested",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Daily Biking",
+              "content": "User bikes to campus every day."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h04",
+          "text": "I also enjoy roguelike games.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "related",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2355,
+          "mode": "live",
+          "rawDecision": "related",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Roguelike Games",
+              "content": "User enjoys roguelike games."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h05",
+          "text": "I'm also building a small Discord bot on weekends.",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "related",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2529,
+          "mode": "live",
+          "rawDecision": "related",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Discord Bot",
+              "content": "User is building a small Discord bot on weekends."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h06",
+          "text": "除了 HCI，我也对机器学习系统方向感兴趣。",
+          "gold": "related",
+          "alternatives": [],
+          "predicted": "related",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2529,
+          "mode": "live",
+          "rawDecision": "related",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Interest in ML Systems",
+              "content": "User is also interested in machine learning systems."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h07",
+          "text": "I'm interested in applied AI, particularly for education tools.",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "related",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 2513,
+          "mode": "live",
+          "rawDecision": "related",
+          "rawOperationTypes": [
+            "suggest_memory"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_memory",
+              "id": "",
+              "title": "Applied AI in Education",
+              "content": "User is interested in applied AI, particularly for education tools."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h08",
+          "text": "我的本科专业是计算机科学，方向偏系统和网络。",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 2660,
+          "mode": "live",
+          "rawDecision": "suggested",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-cs-undergrad",
+              "title": "Undergraduate Major Focus",
+              "content": "User completed an undergraduate degree in Computer Science at the University of Minnesota, with a focus on systems and networks."
+            }
+          ],
+          "dropped": [
+            {
+              "type": "suggest_update",
+              "id": "mem-cs-undergrad",
+              "title": "Undergraduate Major Focus",
+              "content": "User completed an undergraduate degree in Computer Science at the University of Minnesota, with a focus on systems and networks.",
+              "reason": "wrong type"
+            },
+            {
+              "type": "",
+              "id": "",
+              "title": "",
+              "reason": "no operations left, so the decision became not_remembered"
+            }
+          ]
+        },
+        {
+          "id": "h09",
+          "text": "I'm lactose intolerant, and cheese is the thing that bothers me most.",
+          "gold": "refinement",
+          "alternatives": [],
+          "predicted": "update",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 2657,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-lactose",
+              "title": "Lactose Intolerance Details",
+              "content": "User is lactose intolerant and avoids milk and other dairy, especially cheese."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h10",
+          "text": "I switched my weekend project from the AI RPG to a recipe app.",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "update",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2585,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-ai-rpg",
+              "title": "Weekend Project",
+              "content": "User is working on a recipe app as a weekend side project."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h11",
+          "text": "我现在不太玩叙事游戏了，改玩策略游戏。",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "update",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2431,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-games",
+              "title": "Strategy Games",
+              "content": "User plays strategy games to unwind."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h12",
+          "text": "I've deferred my MSCS start to next year.",
+          "gold": "update",
+          "alternatives": [],
+          "predicted": "update",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2623,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-mscs",
+              "title": "MSCS Start Date",
+              "content": "User is pursuing an MSCS at Northwestern starting fall 2027."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h13",
+          "text": "I actually don't play video games at all.",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "conflict",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 2032,
+          "mode": "live",
+          "rawDecision": "conflict",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "h14",
+          "text": "我其实对乳制品没有任何不适。",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "update",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 2596,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-lactose",
+              "title": "Dairy Tolerance",
+              "content": "User does not have any discomfort with dairy products."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h15",
+          "text": "My undergrad was at the University of Michigan.",
+          "gold": "conflict",
+          "alternatives": [],
+          "predicted": "update",
+          "match": false,
+          "lenient": false,
+          "category": null,
+          "error": null,
+          "ms": 2738,
+          "mode": "live",
+          "rawDecision": "update",
+          "rawOperationTypes": [
+            "suggest_update"
+          ],
+          "rawOperations": [
+            {
+              "type": "suggest_update",
+              "id": "mem-cs-undergrad",
+              "title": "Undergraduate Degree",
+              "content": "User completed an undergraduate degree in Computer Science at the University of Michigan."
+            }
+          ],
+          "dropped": []
+        },
+        {
+          "id": "h16",
+          "text": "我不能喝牛奶，喝了会不舒服。",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "duplicate",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1600,
+          "mode": "live",
+          "rawDecision": "duplicate",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "h17",
+          "text": "I'm planning to work in applied AI and not only on theory.",
+          "gold": "duplicate",
+          "alternatives": [],
+          "predicted": "duplicate",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1595,
+          "mode": "live",
+          "rawDecision": "duplicate",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "h18",
+          "text": "Can you recommend a good book on information retrieval?",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 952,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "h19",
+          "text": "I'm so tired today.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1233,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "h20",
+          "text": "我室友最近在学吉他。",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 3368,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "h21",
+          "text": "Summarize this email for me in two sentences.",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1071,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        },
+        {
+          "id": "h22",
+          "text": "谢谢，这个回答很有帮助！",
+          "gold": "not_remembered",
+          "alternatives": [],
+          "predicted": "not_remembered",
+          "match": true,
+          "lenient": true,
+          "category": null,
+          "error": null,
+          "ms": 1266,
+          "mode": "live",
+          "rawDecision": "not_remembered",
+          "rawOperationTypes": [],
+          "rawOperations": [],
+          "dropped": []
+        }
+      ]
+    }
+  }
+}
