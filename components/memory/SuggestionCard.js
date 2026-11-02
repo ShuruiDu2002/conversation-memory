@@ -9,10 +9,37 @@ export default function SuggestionCard() {
     confirmMemory,
     rejectSuggestion,
     acceptUpdate,
+    acceptReorganization,
+    dismissReorganization,
     setSelectedNodeId,
     setPendingSuggestion
   } = useAppState();
   if (!pendingSuggestion) return null;
+
+  if (pendingSuggestion.type === "reorganize") {
+    const moves = pendingSuggestion.moves || [];
+    return (
+      <div className="conflict-card suggestion-card">
+        <h3>Move existing memories?</h3>
+        <p>Do any existing memories belong under this new category?</p>
+        {moves.map((move) => (
+          <p key={move.id}>
+            <strong>{move.title}</strong>
+            {": "}
+            {move.from} -&gt; {move.to}
+          </p>
+        ))}
+        <div className="conflict-actions">
+          <button className="primary-btn" type="button" onClick={() => acceptReorganization(pendingSuggestion)}>
+            Move
+          </button>
+          <button className="text-btn" type="button" onClick={() => dismissReorganization(pendingSuggestion)}>
+            Leave them
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   if (pendingSuggestion.type === "update") {
     return (
@@ -28,6 +55,11 @@ export default function SuggestionCard() {
           <span className="arrow"> → </span>
           <strong>{pendingSuggestion.toContent}</strong>
         </p>
+        {pendingSuggestion.toTitle && pendingSuggestion.toTitle !== pendingSuggestion.fromTitle && (
+          <p>
+            Title: {pendingSuggestion.fromTitle} -&gt; {pendingSuggestion.toTitle}
+          </p>
+        )}
         {pendingSuggestion.reason && pendingSuggestion.reason !== memoryDecision?.reason && (
           <p className="muted">{pendingSuggestion.reason}</p>
         )}

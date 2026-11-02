@@ -17,6 +17,11 @@ export default function ConflictCard() {
         <strong>{pendingConflict.newContent}</strong>
       </p>
       <p>Which is correct?</p>
+      {pendingConflict.newTitle && pendingConflict.newTitle !== pendingConflict.existingTitle && (
+        <p>
+          Title: {pendingConflict.existingTitle} -&gt; {pendingConflict.newTitle}
+        </p>
+      )}
       {pendingConflict.reason && <p className="muted">{pendingConflict.reason}</p>}
       <div className="conflict-actions">
         <button className="ghost-btn" type="button" onClick={() => resolveConflict("existing")}>

@@ -27,7 +27,23 @@ export default function GraphNode({ data }) {
     <div className={classes} title={data.subtitle || data.title}>
       <Handle type="target" position={Position.Left} className="ghandle" />
       <div className="gnode-top">
-        {!data.isMe && <span className={`state-dot ${data.state || "confirmed"}`}>{STATE_MARK[data.state] || "●"}</span>}
+        {data.nodeType === "category" && (
+          <button
+            type="button"
+            className="gnode-chevron"
+            aria-label={data.collapsed ? "Expand category" : "Collapse category"}
+            onMouseDown={(event) => event.stopPropagation()}
+            onClick={(event) => {
+              event.stopPropagation();
+              data.onToggleCollapse?.();
+            }}
+          >
+            {data.collapsed ? "▸" : "▾"}
+          </button>
+        )}
+        {!data.isMe && data.nodeType !== "category" && (
+          <span className={`state-dot ${data.state || "confirmed"}`}>{STATE_MARK[data.state] || "●"}</span>
+        )}
         <span className="gnode-title">{data.title}</span>
       </div>
       <div className="gnode-meta">

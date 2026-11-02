@@ -2,7 +2,7 @@
 
 HCI research prototype for an inspectable user model. After each chat turn, the app decides whether the latest user message is a lasting fact about them, then shows that fact in a hierarchical memory graph the user can confirm, edit, or reject.
 
-The chat reply is generated first and does not read stored memories. This is a local, single-user prototype: the model lives in React state and is lost on refresh.
+The chat reply can read confirmed memories before it answers, either by injecting them or by letting a read-only agent look them up. This is a local, single-user prototype: the model lives in React state and is lost on refresh.
 
 ## What it does
 
@@ -10,6 +10,7 @@ The chat reply is generated first and does not read stored memories. This is a l
 - Extracts a memory decision through `POST /api/memory/extract` using `gpt-4o-mini` JSON mode (temperature 0.2).
 - Labels a turn as `suggested`, `related`, `refinement`, `update`, `conflict`, `duplicate`, or `not_remembered`.
 - Inserts new facts as `suggested` until the user chooses **Remember** or **Don't remember**.
+- The extractor chooses a category for each new memory. You can move a memory to another category from its detail panel.
 - On a conflict, marks the existing memory and asks the user to keep it, replace it, or edit by hand. A replacement appends revision history.
 - Shows the same tree as a graph (React Flow), a nested list, and a created-date timeline.
 - Substring search over title, content, and source text.
@@ -18,16 +19,39 @@ The chat reply is generated first and does not read stored memories. This is a l
 
 The UI ships with a seeded graduate-student demo: 6 conversations, 8 categories, and 15 memories. One conversation (“What fish is this?”) is intentionally not turned into a memory.
 
+## Memory-grounded replies
+
+Chat runs in **Agent** mode by default. **Inject** and **Off** stay under the **⋯** menu, in Experiment → Memory mode. That choice is not saved.
+
+In Inject mode, each reply is grounded in confirmed memories only. Suggested, inferred, conflicting, and outdated nodes are never retrieved.
+
+`/api/chat` embeds the latest user message plus the previous user message with `text-embedding-3-small`, ranks confirmed memories by cosine similarity, and keeps the top matches above a small threshold. With no API key, or if that call fails, it falls back to keyword overlap.
+
+Those facts are added to the system prompt as data. The response includes `usedMemories`, and the assistant message shows a **Used:** chip for each one. Clicking a chip selects that node in the graph.
+
+## Agent mode
+
+Agent mode replaces that automatic injection with a short tool loop. The model decides whether the question needs anything from the user model. A general question, such as arithmetic, is answered with no tool calls. The loop stops after 4 model calls; the last call cannot use tools and must answer.
+
+The agent has three read-only tools. It cannot create, edit, move, or delete memories.
+
+- `search_memory` finds confirmed memories, the same retrieval Inject uses.
+- `get_memory_outline` returns the category tree for confirmed memories, and lists inferred memories so a hedged belief can be found.
+- `get_memory_details` returns content, state, origin, `sourceText`, `createdAt`, and history for a confirmed or inferred memory. An unknown id, or any other state, returns an error.
+
+Tool results are data. The reply must not claim a fact the tools did not return. Each assistant message stores a trace. When the agent used a tool, the message shows **Agent steps (N)**. Expanded, each step shows Thought, Action, and Observation. When Agent mode answers without calling a tool, the message says it did not check memory. The Used chips still list memories the tools returned.
+
+Without an API key, or if the loop fails, the route falls back to Inject and the message shows that warning. The top bar keeps chat and memory status separate: **Chat: live** or **demo**, and **Memory: live** or **fallback**.
+
 ## What it does not do
 
-- It does not retrieve stored memories when generating the next reply. No embeddings, vector search, RAG, tool calling, or agent loop.
 - It does not persist data. There is no database, auth, or multi-user support.
 - It has no tests and no evaluation numbers.
 
 ## Stack
 
 - Next.js 14 (App Router), React 18
-- OpenAI Chat Completions API, model `gpt-4o-mini`
+- OpenAI Chat Completions API, model `gpt-4o-mini`, and Embeddings API, model `text-embedding-3-small`
 - `@xyflow/react` for the graph, with a custom left-to-right layout
 - `react-markdown` for chat bubbles
 
@@ -60,7 +84,7 @@ npm start
 
 ## How a turn works
 
-1. The client appends the user message and calls `POST /api/chat` with the conversation only.
+1. The client appends the user message and calls `POST /api/chat` with the conversation, `memoryMode` (`off`, `inject`, or `agent`), and the memory tree. Inject retrieves confirmed memories and then generates the reply. Agent may call the read-only tools first.
 2. The assistant message is appended.
 3. The client calls `POST /api/memory/extract` with the new exchange, a text outline of the current tree, and a slim node list.
 4. `applyOperations` in `lib/tree.js` writes suggestions or a pending conflict into React state.
@@ -70,12 +94,14 @@ Memory nodes are a flat list with `parentId`. Each node has `type` (`category` o
 ## Project layout
 
 ```text
-app/api/chat/route.js            chat completion
+app/api/chat/route.js            chat completion and memory grounding
 app/api/memory/extract/route.js  extraction prompt and normalization
 app/page.js                      single page
 components/                      chat, sessions, graph, list, timeline, detail
 context/AppContext.js            client state and the send pipeline
 lib/models.js                    node and message shapes
+lib/retrieve.js                  confirmed-memory retrieval
+lib/agentTools.js                read-only agent tools
 lib/tree.js                      tree ops, search, timeline, applyOperations
 lib/heuristicExtract.js          no-API fallback
 lib/graphLayout.js               graph positions
@@ -84,4 +110,4 @@ lib/demoData.js                  seeded conversations and memories
 
 ## Notes
 
-Do not commit `.env.local`. The extractor logs prompts and model output to the server console.
+Do not commit `.env.local`. Set `DEBUG_PROMPTS=true` to log prompts, replies, and memory text on the server. Errors are always logged.

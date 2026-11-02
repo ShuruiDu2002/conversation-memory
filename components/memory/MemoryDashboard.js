@@ -45,20 +45,21 @@ export default function MemoryDashboard() {
     memoryDecision,
     memoryView,
     setMemoryView,
-    graphExpanded,
-    setGraphExpanded
+    modelStats
   } = useAppState();
 
   return (
     <aside className="panel memory-panel">
       <div className="panel-header">
-        <h2>Memory graph</h2>
+        <div className="memory-heading">
+          <h2>Memory graph</h2>
+          <span className="memory-stats">
+            {modelStats.memories} memories · {modelStats.categories} categories
+          </span>
+        </div>
         <div className="header-actions">
           <button className="text-btn" type="button" onClick={() => setCreatingMemory((v) => !v)}>
             {creatingMemory ? "Cancel" : "+ Add"}
-          </button>
-          <button className="text-btn" type="button" onClick={() => setGraphExpanded((v) => !v)}>
-            {graphExpanded ? "Collapse" : "Expand"}
           </button>
         </div>
       </div>
@@ -78,7 +79,7 @@ export default function MemoryDashboard() {
       {isExtracting && <div className="extracting">Reconsidering what is worth remembering…</div>}
       {memoryDecision?.reason && (
         <div className="memory-decision">
-          <div className="memory-decision-kicker">{decisionLabel(memoryDecision.decision)}</div>
+          <span className="memory-decision-kicker">{decisionLabel(memoryDecision.decision)}</span>
           <p>{memoryDecision.reason}</p>
         </div>
       )}
@@ -86,7 +87,7 @@ export default function MemoryDashboard() {
       {pendingConflict && <ConflictCard />}
       {creatingMemory && <CreateMemoryForm />}
       <div className={`panel-body ${memoryView === "graph" ? "graph-body" : ""}`}>
-        {memoryView === "graph" && <MemoryGraph key={String(graphExpanded)} />}
+        {memoryView === "graph" && <MemoryGraph />}
         {memoryView === "list" && <MemoryTree />}
         {memoryView === "timeline" && <MemoryTimeline />}
       </div>

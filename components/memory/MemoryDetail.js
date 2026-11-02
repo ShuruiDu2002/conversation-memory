@@ -8,7 +8,7 @@ import {
   useAppState
 } from "@/context/AppContext";
 import { ME_ID } from "@/lib/models";
-import { countMemories, getNode, getPathTitles } from "@/lib/tree";
+import { countMemories, getChildren, getNode, getPathTitles } from "@/lib/tree";
 
 const STATE_LABEL = {
   confirmed: "Confirmed",
@@ -18,6 +18,19 @@ const STATE_LABEL = {
   outdated: "Outdated"
 };
 
+function categoryOptions(nodes) {
+  const options = [];
+  function walk(parentId, depth) {
+    for (const child of getChildren(nodes, parentId)) {
+      if (child.type !== "category") continue;
+      options.push({ id: child.id, title: child.title, depth });
+      walk(child.id, depth + 1);
+    }
+  }
+  walk(null, 0);
+  return options;
+}
+
 export default function MemoryDetail() {
   const {
     nodes,
@@ -26,6 +39,7 @@ export default function MemoryDetail() {
     editMemory,
     renameMemory,
     deleteMemory,
+    moveMemory,
     jumpToSource,
     confirmMemory,
     confidenceOpen,
@@ -115,7 +129,36 @@ export default function MemoryDetail() {
           )}
         </dd>
         <dt>Category</dt>
-        <dd>{path}</dd>
+        <dd>
+          {node.type === "memory" ? (
+            <select
+              value={node.parentId || ""}
+              onChange={(event) => {
+                const value = event.target.value;
+                if (value === "__new__") {
+                  const name = window.prompt("New category name");
+                  if (!name?.trim()) {
+                    event.target.value = node.parentId || "";
+                    return;
+                  }
+                  moveMemory(node.id, null, name);
+                  return;
+                }
+                moveMemory(node.id, value || null);
+              }}
+            >
+              {!node.parentId && <option value="">Top level</option>}
+              {categoryOptions(nodes).map((category) => (
+                <option key={category.id} value={category.id}>
+                  {`${"\u00A0\u00A0".repeat(category.depth)}${category.title}`}
+                </option>
+              ))}
+              <option value="__new__">New category...</option>
+            </select>
+          ) : (
+            path
+          )}
+        </dd>
         {node.type === "category" && (
           <>
             <dt>Under this topic</dt>

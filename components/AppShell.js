@@ -6,7 +6,7 @@ import ChatPanel from "@/components/chat/ChatPanel";
 import MemoryDashboard from "@/components/memory/MemoryDashboard";
 
 function ShellLayout() {
-  const { apiMode, modelStats, exploreModel, graphExpanded } = useAppState();
+  const { chatMode, extractMode, resetDemo } = useAppState();
 
   return (
     <div className="app-shell">
@@ -17,18 +17,15 @@ function ShellLayout() {
           </div>
           <div className="brand-sub">What does the AI currently know?</div>
         </div>
-        <button type="button" className="model-chip" onClick={exploreModel}>
-          <div className="model-chip-kicker">AI user model</div>
-          <div className="model-chip-title">
-            {modelStats.memories} memories · {modelStats.categories} categories
-          </div>
-          <div className="model-chip-meta">Explore my memory</div>
-        </button>
         <div className="topbar-meta">
-          <span className="pill">{apiMode === "live" ? "OpenAI" : "Demo mode"}</span>
+          <button type="button" className="text-btn" onClick={resetDemo}>
+            Reset demo
+          </button>
+          <span className="pill pill-status">Chat: {chatMode === "live" ? "live" : "demo"}</span>
+          <span className="pill pill-status">Memory: {extractMode === "live" ? "live" : "fallback"}</span>
         </div>
       </header>
-      <div className={`workspace ${graphExpanded ? "graph-expanded" : ""}`}>
+      <div className="workspace">
         <SessionList />
         <ChatPanel />
         <MemoryDashboard />
